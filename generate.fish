@@ -6,7 +6,7 @@ end
 
 # Main output
 set index_file "docs/index.html"
-
+set css_file "style.css"
 
 # Intermediate files
 set markdown_file "build/out.md"
@@ -26,4 +26,4 @@ get_TOA_data team | jq '.[] | .last_active' | sort | uniq -c | strip_whitespace 
 
 paste -d',' $years_file $rookie_counts_file $last_active_file | csv2md >> $markdown_file
 
-pandoc $markdown_file -o $index_file
+pandoc $markdown_file -o $index_file -c $css_file -s  --metadata pagetitle="FTC Team Statistics"
